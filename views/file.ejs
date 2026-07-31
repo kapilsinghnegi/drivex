@@ -1,84 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>View File</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
+    <title><%= file.originalname %> · DriveX</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body class="bg-gray-100 dark:bg-gray-900 p-4 md:p-8">
-    <div
-      class="max-w-xl w-full mx-auto bg-white dark:bg-gray-800 rounded shadow p-4 sm:p-6"
-    >
-      <div class="flex items-center justify-between gap-4">
-        <a
-          href="/home"
-          class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white px-2 py-1 rounded transition-colors"
-        >
-          <i class="ri-arrow-left-s-line text-xl sm:text-2xl"></i>
-        </a>
-        <a
-          href="/download/<%= file.path %>"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded transition-colors"
-          download="<%= file.originalname %>"
-        >
-          <i class="ri-download-line text-sm sm:text-base"></i>
-        </a>
-      </div>
-      <div class="my-3 sm:my-6 flex">
-        <% const publicUrl = `${process.env.SUPABASE_URL.replace('.co',
-        '.co/storage/v1/object/public')}/drive-storage/${file.path}`; %> <% if
-        (file.mimetype.startsWith('image/')) { %>
-        <img
-          src="<%= publicUrl %>"
-          alt="<%= file.originalname %>"
-          class="max-w-full w-full rounded shadow border border-gray-200 dark:border-gray-700 object-contain"
-        />
-        <% } else if (file.mimetype === 'application/pdf') { %>
-        <iframe
-          src="<%= publicUrl %>"
-          width="100%"
-          height="400px"
-          class="rounded border border-gray-200 dark:border-gray-700"
-        ></iframe>
-        <% } else { %>
-        <a
-          href="<%= publicUrl %>"
-          target="_blank"
-          class="text-blue-600 dark:text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-300 transition-colors block text-center"
-          >Open File</a
-        >
-        <% } %>
-      </div>
-      <h1
-        class="px-2 text-lg sm:text-xl md:text-2xl mb-1 sm:mb-2 font-bold text-gray-900 dark:text-white"
+  <body
+    class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-white"
+  >
+    <main class="min-h-screen">
+      <!-- Header -->
+      <header
+        class="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950"
       >
-        <%= file.originalname %>
-      </h1>
-      <div class="px-2 flex flex-col gap-1">
-        <p
-          class="text-sm sm:text-base text-gray-700 dark:text-gray-300 truncate"
+        <div
+          class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
         >
-          Type: <%= file.mimetype %>
-        </p>
-        <p
-          class="text-sm sm:text-base text-gray-700 dark:text-gray-300 truncate"
+          <!-- Brand -->
+          <a href="/home" class="flex items-center">
+            <img src="/logo.png" alt="DriveX" class="h-10 w-auto" />
+            <span class="text-lg font-semibold tracking-tight"> DriveX </span>
+          </a>
+          <!-- Back -->
+          <a
+            href="/home"
+            class="inline-flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50 hover:text-gray-900 dark:border-gray-800 dark:text-gray-400 dark:hover:bg-gray-900 dark:hover:text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-4"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"
+              />
+            </svg>
+            Back to files
+          </a>
+        </div>
+      </header>
+      <!-- Content -->
+      <div class="mx-auto max-w-5xl px-6 py-8">
+        <!-- File heading -->
+        <div
+          class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
         >
-          Size: <%= file.size %> KB
-        </p>
-        <p
-          class="text-sm sm:text-base text-gray-700 dark:text-gray-300 truncate"
+          <div class="min-w-0">
+            <h1
+              class="truncate text-xl font-semibold tracking-tight sm:text-2xl"
+              title="<%= file.originalname %>"
+            >
+              <%= file.originalname %>
+            </h1>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              <%= file.mimetype %>
+            </p>
+          </div>
+          <!-- Download -->
+          <a
+            href="/download/<%= file.path %>"
+            download="<%= file.originalname %>"
+            class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-5"
+              aria-hidden="true"
+            >
+              <path
+                d="M13 4H11V13.17L8.41 10.59L7 12L12 17L17 12L15.59 10.59L13 13.17V4ZM5 20H19V18H5V20Z"
+              />
+            </svg>
+            Download
+          </a>
+        </div>
+        <!-- File Preview -->
+        <section class="mt-8">
+          <% const publicUrl = `${process.env.SUPABASE_URL.replace('.co',
+          '.co/storage/v1/object/public')}/drive-storage/${file.path}`; %> <% if
+          (file.mimetype.startsWith("image/")) { %>
+          <!-- Image -->
+          <div
+            class="flex min-h-[300px] items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-800 dark:bg-gray-900"
+          >
+            <img
+              src="<%= publicUrl %>"
+              alt="<%= file.originalname %>"
+              class="max-h-[70vh] max-w-full rounded-lg object-contain"
+            />
+          </div>
+          <% } else if (file.mimetype === "application/pdf") { %>
+          <!-- PDF -->
+          <div
+            class="overflow-hidden rounded-xl border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-900"
+          >
+            <iframe
+              src="<%= publicUrl %>"
+              title="<%= file.originalname %>"
+              class="h-[70vh] min-h-[500px] w-full border-0"
+            ></iframe>
+          </div>
+          <% } else { %>
+          <!-- Unsupported preview -->
+          <div
+            class="flex min-h-[360px] flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 px-6 text-center dark:border-gray-800"
+          >
+            <div
+              class="flex size-14 items-center justify-center rounded-full bg-gray-100 text-gray-500 dark:bg-gray-900 dark:text-gray-400"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-7"
+                aria-hidden="true"
+              >
+                <path
+                  d="M13 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V9L13 2ZM13 4.5L17.5 9H14C13.4477 9 13 8.55228 13 8V4.5ZM6 4H11V9C11 10.6569 12.3431 12 14 12H18V20H6V4ZM8 14H16V16H8V14ZM8 17H16V19H8V17Z"
+                />
+              </svg>
+            </div>
+            <h2 class="mt-5 text-sm font-medium">Preview unavailable</h2>
+            <p class="mt-1 max-w-sm text-sm text-gray-500 dark:text-gray-400">
+              This file type can't be previewed in DriveX. Open or download the
+              file instead.
+            </p>
+            <a
+              href="<%= publicUrl %>"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-5 inline-flex items-center gap-2 rounded-lg border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-900"
+            >
+              Open file
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="size-4"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14 3H21V10H19V6.41L10.41 15L9 13.59L17.59 5H14V3ZM19 19V13H21V20C21 21.1046 20.1046 22 19 22H4C2.89543 22 2 21.1046 2 20V5C2 3.89543 2.89543 3 4 3H11V5H4V20H19V13H21V19H19Z"
+                />
+              </svg>
+            </a>
+          </div>
+          <% } %>
+        </section>
+        <!-- File Details -->
+        <section
+          class="mt-8 border-t border-gray-200 pt-6 dark:border-gray-800"
         >
-          Uploaded: <%= new Date(file.createdAt).toLocaleDateString("en-GB", {
-          day: "numeric", month: "long", year: "numeric" }) %>
-        </p>
+          <h2 class="text-sm font-medium">File details</h2>
+          <dl class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <!-- Type -->
+            <div>
+              <dt class="text-xs text-gray-400 dark:text-gray-500">Type</dt>
+              <dd
+                class="mt-1 truncate text-sm text-gray-700 dark:text-gray-300"
+                title="<%= file.mimetype %>"
+              >
+                <%= file.mimetype %>
+              </dd>
+            </div>
+            <!-- Size -->
+            <div>
+              <dt class="text-xs text-gray-400 dark:text-gray-500">Size</dt>
+              <dd class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                <%= file.size %> KB
+              </dd>
+            </div>
+            <!-- Uploaded -->
+            <div>
+              <dt class="text-xs text-gray-400 dark:text-gray-500">Uploaded</dt>
+              <dd class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                <%= new Date(file.createdAt).toLocaleDateString("en-GB", { day:
+                "numeric", month: "long", year: "numeric" }) %>
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
-    </div>
+    </main>
   </body>
 </html>
