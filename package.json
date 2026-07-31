@@ -1,5 +1,5 @@
 {
-  "name": "drive",
+  "name": "drivex",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -22,5 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.17.0",
     "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "prettier-plugin-ejs": "^1.0.3"
   }
 }

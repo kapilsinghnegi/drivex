@@ -1,80 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
-      rel="stylesheet"
-    />
+    <title>Create Account · DriveX</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body
-    class="min-h-screen w-full flex items-center justify-center bg-gray-100 dark:bg-gray-900"
+    class="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-white"
   >
-    <form
-      class="w-full max-w-md mx-auto px-4 py-8 bg-white dark:bg-gray-800 rounded-lg shadow"
-      action="/user/register"
-      method="POST"
+    <main
+      class="relative flex min-h-screen items-center justify-center px-6 py-12"
     >
-      <div class="mb-6">
-        <h2
-          class="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white tracking-tight"
-        >
-          Register
-        </h2>
-        <label
-          for="username"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Username</label
-        >
-        <input
-          type="text"
-          id="username"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="John"
-          name="username"
-          required
-        />
-      </div>
-      <div class="mb-6">
-        <label
-          for="email"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Email address</label
-        >
-        <input
-          type="email"
-          id="email"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="john.doe@company.com"
-          name="email"
-          required
-        />
-      </div>
-      <div class="mb-6">
-        <label
-          for="password"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Password</label
-        >
-        <input
-          type="password"
-          id="password"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="•••••••••"
-          name="password"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      <!-- Back -->
+      <a
+        href="/"
+        class="absolute top-6 left-6 text-gray-400 transition hover:text-gray-600 dark:hover:text-gray-300"
       >
-        Submit
-      </button>
-    </form>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-6"
+        >
+          <path
+            d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"
+          ></path></svg
+      ></a>
+      <div class="w-full max-w-md">
+        <!-- Logo & Header -->
+        <div class="mb-8 text-center">
+          <a href="/" class="inline-block">
+            <img src="/logo.png" alt="DriveX" class="mx-auto h-20 w-auto" />
+          </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+          <h1 class="mt-5 text-3xl font-semibold tracking-tight">
+            Create your account
+          </h1>
+
+          <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            Get started with DriveX today.
+          </p>
+        </div>
+
+        <!-- Error Message -->
+        <% if (typeof error !== 'undefined' && error) { %>
+        <div
+          class="mb-5 flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400"
+          role="alert"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-5 mt-0.5 shrink-0"
+          >
+            <path
+              d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM11 7H13V13H11V7Z"
+            ></path>
+          </svg>
+          <span><%= error %></span>
+        </div>
+        <% } %>
+
+        <!-- Success Message -->
+        <% if (typeof success !== 'undefined' && success) { %>
+        <div
+          class="mb-5 flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700 dark:border-green-900/50 dark:bg-green-950/30 dark:text-green-400"
+          role="status"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-5 mt-0.5 shrink-0"
+          >
+            <path
+              d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM17.4571 9.45711L11 15.9142L6.79289 11.7071L8.20711 10.2929L11 13.0858L16.0429 8.04289L17.4571 9.45711Z"
+            ></path>
+          </svg>
+
+          <span><%= success %></span>
+        </div>
+        <% } %>
+
+        <!-- Register Form -->
+        <form action="/user/register" method="POST" class="space-y-5">
+          <!-- Username -->
+          <div>
+            <label
+              for="username"
+              class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Username
+            </label>
+
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="John"
+              autocomplete="username"
+              value="<%= typeof username !== 'undefined' ? username : '' %>"
+              required
+              class="block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 dark:border-gray-800 dark:bg-gray-950 dark:text-white dark:placeholder:text-gray-600 dark:focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label
+              for="email"
+              class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Email address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john.doe@company.com"
+              autocomplete="email"
+              value="<%= typeof email !== 'undefined' ? email : '' %>"
+              required
+              class="block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 dark:border-gray-800 dark:bg-gray-950 dark:text-white dark:placeholder:text-gray-600 dark:focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label
+              for="password"
+              class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="new-password"
+              required
+              class="block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 dark:border-gray-800 dark:bg-gray-950 dark:text-white dark:placeholder:text-gray-600 dark:focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="w-full rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+          >
+            Create account
+          </button>
+        </form>
+
+        <!-- Login -->
+        <p class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          Already have an account?
+          <a
+            href="/user/login"
+            class="font-medium text-blue-600 transition hover:text-blue-500 dark:text-blue-400"
+          >
+            Login
+          </a>
+        </p>
+      </div>
+    </main>
   </body>
 </html>

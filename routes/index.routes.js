@@ -61,7 +61,7 @@ router.post(
       console.error("Upload error:", err);
       res.status(500).json({ error: "Internal server error" });
     }
-  }
+  },
 );
 
 router.get("/download/:path", authMiddleware, async (req, res) => {
@@ -82,7 +82,7 @@ router.get("/download/:path", authMiddleware, async (req, res) => {
 
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="${file.originalname}"`
+      `attachment; filename="${file.originalname}"`,
     );
     res.setHeader("Content-Type", data.type || "application/octet-stream");
 

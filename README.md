@@ -1,4 +1,4 @@
-# Project Drive
+# DriveX
 
 A Google Drive-like backend built with Node.js, Express, MongoDB, Supabase Storage, and JWT authentication.
 This project allows users to register, log in, upload files, and download them securely. It uses Supabase for file storage and MongoDB for user management.
@@ -22,14 +22,15 @@ This is a simple implementation of a file storage system similar to Google Drive
 - Multer (for file uploads)
 - JWT (jsonwebtoken)
 - EJS (templating)
+- TailwindCSS
 
 ## Getting Started
 
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/drive-clone.git
-   cd drive-clone
+   git clone https://github.com/kapilsinghnegi/drivex.git
+   cd drivex
    ```
 
 2. **Install dependencies:**
@@ -60,7 +61,7 @@ This is a simple implementation of a file storage system similar to Google Drive
 ## Folder Structure
 
 ```
-project-drive/
+drivex/
   app.js
   config/
     db.js
